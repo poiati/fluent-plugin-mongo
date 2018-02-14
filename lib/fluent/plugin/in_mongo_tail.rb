@@ -118,7 +118,7 @@ module Fluent::Plugin
       @client_options[:user] = @user if @user
       @client_options[:password] = @password if @password
       @client_options[:read] = :secondary
-      Mongo::Client.new(["#{node_string}"], @client_options)
+      Mongo::Client.new(@url, @client_options)
     end
 
     def get_collection
