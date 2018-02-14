@@ -117,6 +117,7 @@ module Fluent::Plugin
       @client_options[:database] = @database
       @client_options[:user] = @user if @user
       @client_options[:password] = @password if @password
+      @client_options[:read] = :secondary
       Mongo::Client.new(["#{node_string}"], @client_options)
     end
 
