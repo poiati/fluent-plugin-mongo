@@ -103,15 +103,11 @@ module Fluent::Plugin
 
     def run
       option = {}
-      begin
-        option['_id'] = {'$gt' => BSON::ObjectId(@last_id)} if @last_id
-        documents = @collection.find(option)
-        documents = documents.limit(@batch_size) if @batch_size
-        if documents.count >= 1
-          process_documents(documents)
-        end
-      rescue
-        # ignore Exceptions
+      option['_id'] = {'$gt' => BSON::ObjectId(@last_id)} if @last_id
+      documents = @collection.find(option)
+      documents = documents.limit(@batch_size) if @batch_size
+      if documents.count >= 1
+        process_documents(documents)
       end
     end
 
